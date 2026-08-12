@@ -41,13 +41,9 @@ class Avg2DPoolingMerger(nn.Module):
             mask = mask[torch.any(mask, dim=-1)]
 
             hidden_state_reshaped = torch.sum(hidden_state[patch_indices_list], dim=1)/mask.sum(dim=1).unsqueeze(-1)
-            print("hidden_state: {}; hidden_state_reshaped: {}; patch_indices_list: {}".format(
-                hidden_state.size(), hidden_state_reshaped.size(), patch_indices_list.size())
-            )
             outputs[i, -hidden_state_reshaped.size(0):] = hidden_state_reshaped
             outputs_attention[i, -hidden_state_reshaped.size(0):] = 1
 
         outputs = torch.cat([outputs, hidden_states_tail], dim=1)
         outputs_attention = torch.cat([outputs_attention, attention_mask_tail], dim=1)
-        print(outputs.size(), outputs_attention.size())
         return outputs, outputs_attention

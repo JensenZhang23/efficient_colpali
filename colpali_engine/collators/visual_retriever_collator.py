@@ -5,7 +5,6 @@ from torch.nn.utils.rnn import pad_sequence
 
 from PIL.Image import Image
 
-from colpali_engine.models.idefics_2 import ColIdefics2Processor
 from colpali_engine.models.paligemma import ColPaliProcessor
 from colpali_engine.utils.processing_utils import BaseVisualRetrieverProcessor
 from colpali_engine.utils.torch_utils import find_min_max_indices
@@ -31,7 +30,7 @@ class VisualRetrieverCollator:
         self.factor = factor
         self.kernel_size = int(sqrt(pool_size))
 
-        if isinstance(self.processor, ColPaliProcessor) or isinstance(self.processor, ColIdefics2Processor):
+        if isinstance(self.processor, ColPaliProcessor):
             self.image_token_id = self.processor.tokenizer.additional_special_tokens_ids[
                 self.processor.tokenizer.additional_special_tokens.index("<image>")
             ]

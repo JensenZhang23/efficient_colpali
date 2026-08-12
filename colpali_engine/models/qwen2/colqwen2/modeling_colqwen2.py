@@ -238,8 +238,6 @@ class ColQwen2(Qwen2VLForConditionalGeneration):
         # L2 normalization
         proj = (proj+1e-10) / (proj.norm(dim=-1, keepdim=True)+1e-10)  # (batch_size, sequence_length, dim)
         proj = proj * kwargs["attention_mask"].unsqueeze(-1)  # (batch_size, sequence_length, dim)
-        print(proj.size(), proj.device)
-
         if kwargs.get("output_attentions", False):
             return proj, self_attns
         else:
