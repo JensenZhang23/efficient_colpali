@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-# ColPali LoRA training with the same stable effective-batch policy as ColQwen2.
+# Baseline ColPali LoRA training: standard 128-d projection, no merging, no pruning.
 
 set -euo pipefail
-# A batch of 32 is the stable, less memory-intensive ColPali default.
 TARGET_BATCH_SIZE="${TARGET_BATCH_SIZE:-32}"
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
 cd "${PROJECT_ROOT}"
@@ -29,12 +28,12 @@ ARGS=(
 if [[ -n "${RUN_NAME}" ]]; then
   ARGS+=(--run-name "${RUN_NAME}")
 fi
-
 if [[ -n "${MAX_SAMPLES:-}" ]]; then
   ARGS+=(--max-samples "${MAX_SAMPLES}")
 fi
 
-echo "Training ColPali with ${NUM_PROCESSES} process(es), effective batch approximately ${TARGET_BATCH_SIZE}."
+echo "Baseline ColPali: projection enabled; merging/pruning disabled."
+echo "Training with ${NUM_PROCESSES} process(es), effective batch approximately ${TARGET_BATCH_SIZE}."
 if [[ "${NUM_PROCESSES}" -gt 1 ]]; then
   accelerate launch --num_processes "${NUM_PROCESSES}" "${ARGS[@]}"
 else

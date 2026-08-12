@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Cheap end-to-end check before a full training or evaluation job.
+# Cheap baseline check; it does not enable merging or pruning.
 
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
@@ -14,4 +14,4 @@ TARGET_BATCH_SIZE=8 \
 COLQWEN2_OUTPUT="${OUTPUT_ROOT}/colqwen2-smoke" \
 bash scripts/train_colqwen2.sh
 
-echo "Inference/evaluation and one minimal training run completed."
+echo "Baseline inference/evaluation and minimal training completed."

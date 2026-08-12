@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-# Recommended training path: ColQwen2 is faster and generally stronger for retrieval.
+# Baseline ColQwen2 LoRA training: standard 128-d projection, no merging, no pruning.
 
 set -euo pipefail
-# ColQwen2-v1.0 used an effective batch of 256; preserve it by default.
 TARGET_BATCH_SIZE="${TARGET_BATCH_SIZE:-256}"
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
 cd "${PROJECT_ROOT}"
@@ -29,12 +28,12 @@ ARGS=(
 if [[ -n "${RUN_NAME}" ]]; then
   ARGS+=(--run-name "${RUN_NAME}")
 fi
-
 if [[ -n "${MAX_SAMPLES:-}" ]]; then
   ARGS+=(--max-samples "${MAX_SAMPLES}")
 fi
 
-echo "Training ColQwen2 with ${NUM_PROCESSES} process(es), effective batch approximately ${TARGET_BATCH_SIZE}."
+echo "Baseline ColQwen2: projection enabled; merging/pruning disabled."
+echo "Training with ${NUM_PROCESSES} process(es), effective batch approximately ${TARGET_BATCH_SIZE}."
 if [[ "${NUM_PROCESSES}" -gt 1 ]]; then
   accelerate launch --num_processes "${NUM_PROCESSES}" "${ARGS[@]}"
 else

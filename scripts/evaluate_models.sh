@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Evaluate both official checkpoints. Set *_MODEL to evaluate local LoRA outputs.
+# Baseline evaluation of official checkpoints: standard projection, no merging/pruning.
 
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
@@ -14,6 +14,7 @@ if [[ -n "${EVAL_LIMIT:-}" ]]; then
   LIMIT_ARGS=(--limit "${EVAL_LIMIT}")
 fi
 
+echo "Baseline evaluation: projection enabled; merging/pruning disabled."
 python scripts/evaluate.py \
   --model-type colqwen2 \
   --model-name "${COLQWEN2_MODEL}" \
