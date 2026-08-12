@@ -33,6 +33,9 @@ def main():
     parser.add_argument("--gradient-accumulation-steps", type=int, default=8)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
     parser.add_argument("--max-samples", type=int, help="Useful for smoke tests")
+    parser.add_argument("--eval-samples", type=int, default=500)
+    parser.add_argument("--report-to", choices=["none", "wandb"], default="none")
+    parser.add_argument("--run-name")
     args = parser.parse_args()
 
     model_class, processor_class, default_name = TRAIN_REGISTRY[args.model_type]
@@ -42,9 +45,25 @@ def main():
 
     path = Path(args.dataset)
     dataset = load_from_disk(str(path)) if path.exists() else load_dataset(args.dataset)
-    train_dataset = dataset["train"] if hasattr(dataset, "keys") and "train" in dataset else dataset
+    if hasattr(dataset, "keys") and "train" in dataset:
+        train_dataset = dataset["train"]
+        eval_dataset = dataset.get("test")
+        if eval_dataset is None:
+            eval_dataset = dataset.get("validation")
+    else:
+        train_dataset = dataset
+        eval_dataset = None
+
     if args.max_samples:
         train_dataset = train_dataset.select(range(min(args.max_samples, len(train_dataset))))
+    if eval_dataset is None:
+        if len(train_dataset) < 2:
+            raise ValueError("At least two training samples are required to create a validation split")
+        eval_size = max(1, min(args.eval_samples, len(train_dataset) // 10))
+        split = train_dataset.train_test_split(test_size=eval_size, seed=42)
+        train_dataset, eval_dataset = split["train"], split["test"]
+    elif args.eval_samples:
+        eval_dataset = eval_dataset.select(range(min(args.eval_samples, len(eval_dataset))))
 
     model = model_class.from_pretrained(
         model_name,
@@ -75,17 +94,24 @@ def main():
         learning_rate=args.learning_rate,
         warmup_ratio=0.025,
         logging_steps=10,
-        save_steps=500,
+        logging_strategy="steps",
+        eval_strategy="epoch",
+        save_strategy="epoch",
         save_total_limit=2,
+        load_best_model_at_end=True,
+        metric_for_best_model="eval_loss",
+        greater_is_better=False,
         bf16=device != "cpu",
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
         remove_unused_columns=False,
-        report_to="none",
+        report_to=args.report_to,
+        run_name=args.run_name,
     )
     trainer = ContrastiveTrainer(
         model=model,
         train_dataset=train_dataset,
+        eval_dataset=eval_dataset,
         args=training_args,
         data_collator=VisualRetrieverCollator(processor=processor, max_length=50, pool_size=1),
         loss_func=ColbertPairwiseCELoss(),

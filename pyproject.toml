@@ -48,6 +48,8 @@ train = [
     "datasets>=2.19.1",
 ]
 
+monitor = ["wandb>=0.17.0"]
+
 dev = ["pytest>=8.0.0", "ruff>=0.4.0"]
 
 all = ["colpali-engine[dev]", "colpali-engine[train]"]

@@ -18,12 +18,30 @@
 | Hugging Face Trainer 扩展 | [contrastive_trainer.py](colpali_engine/trainer/contrastive_trainer.py) |
 | CPU/CUDA/Ascend 设备选择 | [torch_utils.py](colpali_engine/utils/torch_utils.py) |
 
+常用自动化脚本：
+
+| 脚本 | 用途 |
+| --- | --- |
+| [download_assets.sh](scripts/download_assets.sh) | 缓存两种模型的推理/训练权重并获取数据集 |
+| [train_colqwen2.sh](scripts/train_colqwen2.sh) | 推荐的 ColQwen2 LoRA 训练设置 |
+| [train_colpali.sh](scripts/train_colpali.sh) | ColPali LoRA 训练设置 |
+| [evaluate_models.sh](scripts/evaluate_models.sh) | 依次评测两个官方 checkpoint |
+| [smoke_test.sh](scripts/smoke_test.sh) | 8 条评测样本与 16 条训练样本的端到端检查 |
+| [env.sh](scripts/env.sh) | 路径、设备和 batch size 的公共环境变量 |
+
 ## 安装
 
 Python 3.9+：
 
 ```bash
 pip install -e ".[train]"
+```
+
+如需将训练和验证曲线上报到 Weights & Biases：
+
+```bash
+pip install -e ".[train,monitor]"
+wandb login
 ```
 
 默认代码不依赖 FlashAttention、bitsandbytes 或 NVIDIA NVML，因此普通 CUDA、CPU 与 Ascend 环境共用同一套入口。
@@ -39,6 +57,18 @@ python -c "import torch, torch_npu; print(torch.npu.is_available())"
 脚本中的 `--device auto` 按 NPU、CUDA、MPS、CPU 的顺序自动选择设备。为保证可移植性，模型默认使用 `eager` attention。
 
 ## 1. 获取数据
+
+一次性获取权重和数据：
+
+```bash
+bash scripts/download_assets.sh
+```
+
+权重写入项目内的 `.cache/huggingface/`，评测集和训练集写入 `data_dir/`。训练集约 41 GB；如果只做推理和评测，可以跳过它：
+
+```bash
+DOWNLOAD_TRAIN_DATA=0 bash scripts/download_assets.sh
+```
 
 评测集较小，建议先下载它验证流程：
 
@@ -95,6 +125,18 @@ python scripts/infer.py \
 
 ## 3. 评测
 
+使用推荐设置依次评测两个官方模型：
+
+```bash
+bash scripts/evaluate_models.sh
+```
+
+低成本验证：
+
+```bash
+EVAL_LIMIT=16 EVAL_BATCH_SIZE=1 bash scripts/evaluate_models.sh
+```
+
 先用少量样本进行 smoke test：
 
 ```bash
@@ -116,6 +158,36 @@ python scripts/evaluate.py \
 评测会对物理页面去重，编码全部 query/page，并输出 `Recall@K`、`MRR@K` 和 `NDCG@K`。指标实现直接位于 [scripts/evaluate.py](scripts/evaluate.py)。
 
 ## 4. 最小 LoRA 训练
+
+推荐直接使用自适应训练脚本：
+
+```bash
+# 单卡
+bash scripts/train_colqwen2.sh
+
+# 8 卡 CUDA 或 Ascend；自动将有效 batch size 调整到约 256
+NUM_PROCESSES=8 bash scripts/train_colqwen2.sh
+```
+
+ColQwen2 默认有效 batch size 为 256；ColPali 使用更节省资源的 32。ColPali 对应执行 `bash scripts/train_colpali.sh`。显存不足时可设置 `PER_DEVICE_BATCH_SIZE=1`，也可用 `TARGET_BATCH_SIZE` 覆盖默认值。所有变量见 [env.sh](scripts/env.sh)。
+
+训练默认保留最多 500 条验证样本，每个 epoch 计算并在终端打印 `eval_loss`，保存一次 checkpoint，并在训练结束时恢复 `eval_loss` 最低的 checkpoint。可通过 `EVAL_SAMPLES` 调整验证规模：
+
+```bash
+EVAL_SAMPLES=1000 bash scripts/train_colqwen2.sh
+```
+
+启用 W&B 监控：
+
+```bash
+WANDB_PROJECT=efficient-colpali \
+REPORT_TO=wandb \
+RUN_NAME=colqwen2-lora-exp01 \
+NUM_PROCESSES=8 \
+bash scripts/train_colqwen2.sh
+```
+
+W&B 会记录 `loss`、`eval_loss`、学习率、epoch、训练吞吐和运行时间。完整的 Recall/MRR/NDCG 需要编码整个验证语料，成本明显高于验证 loss，因此仍通过 [evaluate_models.sh](scripts/evaluate_models.sh) 在训练后运行；评测本地 checkpoint 时设置 `COLQWEN2_MODEL=outputs/colqwen2-lora`。
 
 先用少量数据确认环境和显存：
 
@@ -181,3 +253,10 @@ pytest -m "not slow"
 ```
 
 项目基于 [ColPali](https://arxiv.org/abs/2407.01449)，引用信息见 [CITATION.cff](CITATION.cff)，许可证见 [LICENSE](LICENSE)。
+
+## 快速入手
+
+```bash
+DOWNLOAD_TRAIN_DATA=0 bash scripts/download_assets.sh
+bash scripts/evaluate_models.sh
+```
