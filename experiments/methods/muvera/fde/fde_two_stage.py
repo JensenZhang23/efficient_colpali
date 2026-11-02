@@ -68,10 +68,10 @@ import numpy as np
 import torch
 import torch_npu  # noqa: F401
 
-from experiment.methods.muvera.fde.fde_eval import (
+from experiments.methods.muvera.fde.fde_eval import (
     fde_batch, ndcg, maxsim, timed, CONFIGS,
 )
-from experiment.methods.token_quantization.rq.rq_quant import (
+from experiments.methods.token_quantization.rq.rq_quant import (
     fit_rq, encode_rq, reconstruct_rq,
 )
 

@@ -45,7 +45,7 @@ import torch
 import torch_npu  # noqa: F401
 from torch import optim
 
-from experiment.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
+from experiments.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
 import model_rqmoe
 
 DEVICE = os.environ.get("DEVICE", "npu:0")

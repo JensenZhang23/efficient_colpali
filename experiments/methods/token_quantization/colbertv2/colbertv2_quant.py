@@ -13,7 +13,7 @@ import math
 
 import torch
 
-from experiment.methods.token_quantization.rq.rq_quant import _assign, _euclidean_kmeans
+from experiments.methods.token_quantization.rq.rq_quant import _assign, _euclidean_kmeans
 
 
 @torch.no_grad()

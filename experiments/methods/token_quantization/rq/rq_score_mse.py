@@ -213,7 +213,7 @@ def main():
 
     # standard RQ baseline (unweighted)
     log("\nFitting standard RQ (unweighted)...")
-    from experiment.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
+    from experiments.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
     t0 = time.time()
     cb_std = fit_rq(valid.to(DEVICE), M_VAL, K_VAL)
     codes_std = encode_rq(valid.to(DEVICE), cb_std)
@@ -243,7 +243,7 @@ def main():
     t0 = time.time()
     cb_w = fit_rq_weighted(valid.to(DEVICE), w_valid.to(DEVICE), M_VAL, K_VAL)
     # encode with nearest-centroid (no gradient, same as standard)
-    from experiment.methods.token_quantization.rq.rq_quant import encode_rq, reconstruct_rq
+    from experiments.methods.token_quantization.rq.rq_quant import encode_rq, reconstruct_rq
     codes_w = encode_rq(valid.to(DEVICE), cb_w)
     rec_w   = reconstruct_rq(codes_w, cb_w).cpu()
     t_w = time.time() - t0

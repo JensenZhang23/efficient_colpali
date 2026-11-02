@@ -31,8 +31,8 @@ sys.path.insert(0, str(ROOT))
 import torch
 import torch_npu  # noqa: F401
 
-from experiment.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
-from experiment.methods.token_quantization.rq.rq_quant import _euclidean_kmeans, _assign
+from experiments.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
+from experiments.methods.token_quantization.rq.rq_quant import _euclidean_kmeans, _assign
 
 DEVICE = os.environ.get("DEVICE", "npu:0")
 DATASET = os.environ.get("DATASET", "physics")

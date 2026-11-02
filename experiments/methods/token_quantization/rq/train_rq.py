@@ -28,7 +28,7 @@ np.random.seed(42)
 torch.manual_seed(42)
 torch.npu.manual_seed_all(42)
 
-from experiment.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
+from experiments.methods.token_quantization.rq.rq_quant import fit_rq, encode_rq, reconstruct_rq
 
 import argparse as _ap
 _p = _ap.ArgumentParser()

@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import torch
 
-from experiment.methods.token_quantization.pq.pq_quant import encode_pq, fit_pq, reconstruct_pq
+from experiments.methods.token_quantization.pq.pq_quant import encode_pq, fit_pq, reconstruct_pq
 
 
 @torch.no_grad()
