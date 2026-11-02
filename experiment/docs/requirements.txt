@@ -1,0 +1,37 @@
+# experiment/ 运行环境依赖
+# 版本取自实验实际运行环境；transformers 版本尤其关键，务必钉死 4.46.3。
+#
+# 安装:
+#   pip install -r experiment/docs/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+#
+# 注意:
+#   - colpali_engine 是本地包（仓库根目录 colpali_engine/），不在此列。
+#   - Qinco-main/、muvera-py-master/、RQ-MoE-main/ 也是本地目录，不在此列；
+#     各脚本通过 --qinco-dir / --muvera-dir / --rqmoe-dir 参数接收路径。
+#   - NPU (Ascend) 环境请另按平台安装对应的 torch / torch_npu，
+#     不要直接使用下面的 torch==2.9.0。
+
+# ── 核心 ──────────────────────────────────────────────────────────────────
+torch==2.9.0
+numpy==1.26.0
+
+# ── colpali_engine 推理链 ─────────────────────────────────────────────────
+# transformers 版本是历史踩坑点，4.46.3 已验证可用
+transformers==4.46.3
+accelerate==1.14.0
+safetensors==0.5.3
+tokenizers==0.20.3
+huggingface-hub==0.34.3
+sentencepiece==0.2.0
+einops==0.8.1
+peft==0.20.0
+
+# ── QINCo2 训练 ───────────────────────────────────────────────────────────
+omegaconf==2.3.0
+
+# ── 数据处理 ──────────────────────────────────────────────────────────────
+pyarrow==17.0.0
+Pillow==11.3.0
+
+# ── 可视化（可选，仅 plot_ptm_results.py 等使用）─────────────────────────
+matplotlib==3.10.3

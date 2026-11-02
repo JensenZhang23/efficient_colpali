@@ -1,0 +1,341 @@
+{
+  "dataset": "physics",
+  "sample_pages": 50,
+  "sample_queries": 100,
+  "baselines": {
+    "exact": 0.7435352206230164,
+    "tree@32": 0.7119064331054688
+  },
+  "grid_results": [
+    {
+      "prune_k": -2.0,
+      "merge_factor": 2,
+      "ndcg_at_5": 0.7229785323143005,
+      "tokens_per_page": 347.0799865722656,
+      "retention_pct": 97.2352771276267,
+      "memory_MB": 8.473632484674454,
+      "time_sec": 27.1870059967041
+    },
+    {
+      "prune_k": -2.0,
+      "merge_factor": 4,
+      "ndcg_at_5": 0.730882465839386,
+      "tokens_per_page": 173.3000030517578,
+      "retention_pct": 98.29829785695578,
+      "memory_MB": 4.230957105755806,
+      "time_sec": 14.50838041305542
+    },
+    {
+      "prune_k": -2.0,
+      "merge_factor": 6,
+      "ndcg_at_5": 0.6990867853164673,
+      "tokens_per_page": 115.29999542236328,
+      "retention_pct": 94.02201347377932,
+      "memory_MB": 2.814941294491291,
+      "time_sec": 11.313244342803955
+    },
+    {
+      "prune_k": -2.0,
+      "merge_factor": 8,
+      "ndcg_at_5": 0.7323391437530518,
+      "tokens_per_page": 86.39999389648438,
+      "retention_pct": 98.49421028628835,
+      "memory_MB": 2.109374850988388,
+      "time_sec": 9.655021667480469
+    },
+    {
+      "prune_k": -2.0,
+      "merge_factor": 12,
+      "ndcg_at_5": 0.7158342599868774,
+      "tokens_per_page": 57.44000244140625,
+      "retention_pct": 96.2744252232022,
+      "memory_MB": 1.4023438096046448,
+      "time_sec": 6.876091003417969
+    },
+    {
+      "prune_k": -2.0,
+      "merge_factor": 16,
+      "ndcg_at_5": 0.7221559286117554,
+      "tokens_per_page": 42.959999084472656,
+      "retention_pct": 97.12464300032121,
+      "memory_MB": 1.0488281026482582,
+      "time_sec": 5.2769293785095215
+    },
+    {
+      "prune_k": -1.5,
+      "merge_factor": 2,
+      "ndcg_at_5": 0.7510890364646912,
+      "tokens_per_page": 336.5799865722656,
+      "retention_pct": 101.01593248472417,
+      "memory_MB": 8.217284828424454,
+      "time_sec": 21.085663557052612
+    },
+    {
+      "prune_k": -1.5,
+      "merge_factor": 4,
+      "ndcg_at_5": 0.7282335162162781,
+      "tokens_per_page": 168.09999084472656,
+      "retention_pct": 97.94203368148226,
+      "memory_MB": 4.104003682732582,
+      "time_sec": 16.2200186252594
+    },
+    {
+      "prune_k": -1.5,
+      "merge_factor": 6,
+      "ndcg_at_5": 0.7361841797828674,
+      "tokens_per_page": 111.87999725341797,
+      "retention_pct": 99.01133925653322,
+      "memory_MB": 2.7314452454447746,
+      "time_sec": 11.889963150024414
+    },
+    {
+      "prune_k": -1.5,
+      "merge_factor": 8,
+      "ndcg_at_5": 0.7138317227363586,
+      "tokens_per_page": 83.83999633789062,
+      "retention_pct": 96.00509874141956,
+      "memory_MB": 2.046874910593033,
+      "time_sec": 10.53680157661438
+    },
+    {
+      "prune_k": -1.5,
+      "merge_factor": 12,
+      "ndcg_at_5": 0.678393542766571,
+      "tokens_per_page": 55.720001220703125,
+      "retention_pct": 91.23892506371624,
+      "memory_MB": 1.3603515923023224,
+      "time_sec": 7.7552711963653564
+    },
+    {
+      "prune_k": -1.5,
+      "merge_factor": 16,
+      "ndcg_at_5": 0.7359527349472046,
+      "tokens_per_page": 41.68000030517578,
+      "retention_pct": 98.9802116341633,
+      "memory_MB": 1.0175781324505806,
+      "time_sec": 6.014415264129639
+    },
+    {
+      "prune_k": -1.0,
+      "merge_factor": 2,
+      "ndcg_at_5": 0.7363153100013733,
+      "tokens_per_page": 319.65997314453125,
+      "retention_pct": 99.02897530320172,
+      "memory_MB": 7.8041985630989075,
+      "time_sec": 23.548415660858154
+    },
+    {
+      "prune_k": -1.0,
+      "merge_factor": 4,
+      "ndcg_at_5": 0.7186540365219116,
+      "tokens_per_page": 159.59999084472656,
+      "retention_pct": 96.6536643576539,
+      "memory_MB": 3.896484151482582,
+      "time_sec": 16.608723640441895
+    },
+    {
+      "prune_k": -1.0,
+      "merge_factor": 6,
+      "ndcg_at_5": 0.7063854932785034,
+      "tokens_per_page": 106.2199935913086,
+      "retention_pct": 95.0036358313484,
+      "memory_MB": 2.5932615622878075,
+      "time_sec": 13.482754230499268
+    },
+    {
+      "prune_k": -1.0,
+      "merge_factor": 8,
+      "ndcg_at_5": 0.6927774548530579,
+      "tokens_per_page": 79.53999328613281,
+      "retention_pct": 93.17345508832413,
+      "memory_MB": 1.9418943673372269,
+      "time_sec": 11.21287202835083
+    },
+    {
+      "prune_k": -1.0,
+      "merge_factor": 12,
+      "ndcg_at_5": 0.7176355123519897,
+      "tokens_per_page": 52.899993896484375,
+      "retention_pct": 96.51668037334869,
+      "memory_MB": 1.291503757238388,
+      "time_sec": 7.866870880126953
+    },
+    {
+      "prune_k": -1.0,
+      "merge_factor": 16,
+      "ndcg_at_5": 0.7028546333312988,
+      "tokens_per_page": 39.57999801635742,
+      "retention_pct": 94.52876122564432,
+      "memory_MB": 0.9663085453212261,
+      "time_sec": 6.263897657394409
+    },
+    {
+      "prune_k": -0.5,
+      "merge_factor": 2,
+      "ndcg_at_5": 0.7478256225585938,
+      "tokens_per_page": 289.6199951171875,
+      "retention_pct": 100.57702739783899,
+      "memory_MB": 7.0708006620407104,
+      "time_sec": 20.59853482246399
+    },
+    {
+      "prune_k": -0.5,
+      "merge_factor": 4,
+      "ndcg_at_5": 0.7301588654518127,
+      "tokens_per_page": 144.59999084472656,
+      "retention_pct": 98.20097894488502,
+      "memory_MB": 3.530273213982582,
+      "time_sec": 14.820608377456665
+    },
+    {
+      "prune_k": -0.5,
+      "merge_factor": 6,
+      "ndcg_at_5": 0.7186789512634277,
+      "tokens_per_page": 96.22000122070312,
+      "retention_pct": 96.65701520652091,
+      "memory_MB": 2.3491211235523224,
+      "time_sec": 12.24478006362915
+    },
+    {
+      "prune_k": -0.5,
+      "merge_factor": 8,
+      "ndcg_at_5": 0.7290273904800415,
+      "tokens_per_page": 72.1199951171875,
+      "retention_pct": 98.04880391129036,
+      "memory_MB": 1.7607420682907104,
+      "time_sec": 10.047724723815918
+    },
+    {
+      "prune_k": -0.5,
+      "merge_factor": 12,
+      "ndcg_at_5": 0.7097206115722656,
+      "tokens_per_page": 47.86000061035156,
+      "retention_pct": 95.45218462920732,
+      "memory_MB": 1.1684570461511612,
+      "time_sec": 7.511603355407715
+    },
+    {
+      "prune_k": -0.5,
+      "merge_factor": 16,
+      "ndcg_at_5": 0.717517077922821,
+      "tokens_per_page": 35.81999969482422,
+      "retention_pct": 96.50075181665309,
+      "memory_MB": 0.8745117112994194,
+      "time_sec": 5.730906963348389
+    },
+    {
+      "prune_k": 0.0,
+      "merge_factor": 2,
+      "ndcg_at_5": 0.7192645072937012,
+      "tokens_per_page": 229.6599884033203,
+      "retention_pct": 96.73576817128064,
+      "memory_MB": 5.606933310627937,
+      "time_sec": 15.900230646133423
+    },
+    {
+      "prune_k": 0.0,
+      "merge_factor": 4,
+      "ndcg_at_5": 0.7065865993499756,
+      "tokens_per_page": 114.58000183105469,
+      "retention_pct": 95.03068311383002,
+      "memory_MB": 2.7973633259534836,
+      "time_sec": 10.878415584564209
+    },
+    {
+      "prune_k": 0.0,
+      "merge_factor": 6,
+      "ndcg_at_5": 0.7062721848487854,
+      "tokens_per_page": 76.18000030517578,
+      "retention_pct": 94.98839668374985,
+      "memory_MB": 1.8598632887005806,
+      "time_sec": 9.169156074523926
+    },
+    {
+      "prune_k": 0.0,
+      "merge_factor": 8,
+      "ndcg_at_5": 0.6928958892822266,
+      "tokens_per_page": 56.97999954223633,
+      "retention_pct": 93.18938364501973,
+      "memory_MB": 1.391113270074129,
+      "time_sec": 6.963135480880737
+    },
+    {
+      "prune_k": 0.0,
+      "merge_factor": 12,
+      "ndcg_at_5": 0.6862902641296387,
+      "tokens_per_page": 37.86000061035156,
+      "retention_pct": 92.30097581047855,
+      "memory_MB": 0.9243164211511612,
+      "time_sec": 5.4727699756622314
+    },
+    {
+      "prune_k": 0.0,
+      "merge_factor": 16,
+      "ndcg_at_5": 0.7029191851615906,
+      "tokens_per_page": 28.299997329711914,
+      "retention_pct": 94.53744297043613,
+      "memory_MB": 0.6909179035574198,
+      "time_sec": 4.248144865036011
+    },
+    {
+      "prune_k": 0.5,
+      "merge_factor": 2,
+      "ndcg_at_5": 0.7079464197158813,
+      "tokens_per_page": 121.95999908447266,
+      "retention_pct": 95.21356891778244,
+      "memory_MB": 2.977539040148258,
+      "time_sec": 7.146375417709351
+    },
+    {
+      "prune_k": 0.5,
+      "merge_factor": 4,
+      "ndcg_at_5": 0.663197934627533,
+      "tokens_per_page": 60.7400016784668,
+      "retention_pct": 89.19522791023027,
+      "memory_MB": 1.4829101972281933,
+      "time_sec": 5.371050834655762
+    },
+    {
+      "prune_k": 0.5,
+      "merge_factor": 6,
+      "ndcg_at_5": 0.6861899495124817,
+      "tokens_per_page": 40.31999588012695,
+      "retention_pct": 92.28748423477714,
+      "memory_MB": 0.9843748994171619,
+      "time_sec": 4.143149375915527
+    },
+    {
+      "prune_k": 0.5,
+      "merge_factor": 8,
+      "ndcg_at_5": 0.6784526109695435,
+      "tokens_per_page": 30.040000915527344,
+      "retention_pct": 91.24686930110191,
+      "memory_MB": 0.7333984598517418,
+      "time_sec": 3.3843467235565186
+    },
+    {
+      "prune_k": 0.5,
+      "merge_factor": 12,
+      "ndcg_at_5": 0.629458487033844,
+      "tokens_per_page": 19.919998168945312,
+      "retention_pct": 84.6575212007326,
+      "memory_MB": 0.4863280802965164,
+      "time_sec": 2.5538816452026367
+    },
+    {
+      "prune_k": 0.5,
+      "merge_factor": 16,
+      "ndcg_at_5": 0.633309006690979,
+      "tokens_per_page": 14.799999237060547,
+      "retention_pct": 85.1753876783836,
+      "memory_MB": 0.3613281063735485,
+      "time_sec": 2.0219810009002686
+    }
+  ],
+  "best_config": [
+    -0.5,
+    16,
+    35.81999969482422,
+    0.717517077922821
+  ]
+}
